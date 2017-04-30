@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Role;
 use App\User;
-use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $response = [
-            'msg' => 'All users',
-            'user' => User::all()];
+         $response = [
+            'msg' => 'All roles',
+            'roles' => Role::all()];
         
         return response()->json($response, 200);
     }
@@ -41,19 +41,16 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'email'=>'required|email',
-            'password'=>'required|min:6'
+            'role_name'=>'required'
         ]);
 
-        $user = new User;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->active = true;
-        $user->save();
+        $role = new Role;
+        $role->role_name = $request->role_name;
+        $role->save();
 
         $response = [
-            'msg' => "User $user->email created.",
-            'user' => $user
+            'msg' => "Role $role->role_name created.",
+            'role' => $role
         ];
 
         return response()->json($response, 201);
@@ -67,7 +64,23 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return "Hi!";
+    }
+
+    public function assignUser(Request $request, $id){
+       
+        $user = User::find($request->userId);
+
+        $role = Role::find($id);
+        $user->roles()->save($role);
+        $users = $role->users; //calling for lazy loading
+
+          $response = [
+            'msg' => "User added to role.",
+            'role' => $role
+        ];
+
+        return response()->json($response, 201);
     }
 
     /**

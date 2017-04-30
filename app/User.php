@@ -12,4 +12,8 @@ class User extends Model
     public function profile(){
         return $this->hasOne('Profile');
     }
+
+    public function roles(){
+        return $this->belongsToMany('App\Role')->withTimeStamps();
+    }
 }
