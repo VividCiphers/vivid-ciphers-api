@@ -67,7 +67,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        $user->profile;
+
+         $response = [
+            'msg' => "Found 1 user with id $id",
+            'user' => $user];
+        
+        return response()->json($response, 200);
     }
 
     /**

@@ -19,6 +19,11 @@ class CreateProfilesTable extends Migration
             $table->string('first_name', 50);
             $table->string('last_name', 50);
             $table->string('biography', 1000);
+            $table->string('country', 50);
+            $table->string('province', 50);
+            $table->string('city', 50);
+            $table->integer('years_experience')->unsigned();
+            $table->string('github_link', 100);
             $table->string('image_path', 200);
             $table->string('image_text', 200);
             $table->timestamps();
