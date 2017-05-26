@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('email', 100);
             $table->string('password', 500);
-            $table->timestamp('last_login');
+            $table->timestamp('last_login')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
             $table->boolean('active')->default(true);
         });
