@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Role;
 
 class SkillController extends Controller
 {
@@ -13,7 +14,12 @@ class SkillController extends Controller
      */
     public function index()
     {
-        //
+           $response = [
+            'msg' => 'All roles',
+            'roles' => Role::all()];
+        
+        return response()->json($response, 200);
+
     }
 
     /**
