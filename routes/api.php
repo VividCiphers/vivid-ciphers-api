@@ -15,4 +15,5 @@ use Illuminate\Http\Request;
 
 Route::resource('/users', 'UserController');
 Route::resource('/roles', 'RoleController');
+Route::resource('/skills', 'SkillController');
 Route::post('/roles/{id}/assignUser/', 'RoleController@assignUser');

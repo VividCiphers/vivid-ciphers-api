@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Role;
-use App\User;
 
-class RoleController extends Controller
+class SkillController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +13,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-         $response = [
-            'msg' => 'All roles',
-            'roles' => Role::with("users")->get()];
-        
-        return response()->json($response, 200);
+        //
     }
 
     /**
@@ -40,20 +34,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'role_name'=>'required'
-        ]);
-
-        $role = new Role;
-        $role->role_name = $request->role_name;
-        $role->save();
-
-        $response = [
-            'msg' => "Role $role->role_name created.",
-            'role' => $role
-        ];
-
-        return response()->json($response, 201);
+        //
     }
 
     /**
@@ -64,22 +45,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        return "Hi!";
-    }
-
-    public function assignUser(Request $request, $id){
-       
-        $user = User::with("roles")->find($request->userId);
-
-        $role = Role::find($id);
-        $user->roles()->attach($role);
-
-          $response = [
-            'msg' => "User added to role.",
-            'role' => $role
-        ];
-
-        return response()->json($response, 201);
+        //
     }
 
     /**
