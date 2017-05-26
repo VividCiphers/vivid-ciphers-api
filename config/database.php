@@ -1,5 +1,8 @@
 <?php
 
+$url = getenv('JAWSDB_URL');
+$dbparts = parse_url($url);
+
 return [
 
     /*
@@ -41,11 +44,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'vivid-ciphers'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => $dbparts['host'],
+            'port' => $dbparts['port'],
+            'database' => ltrim($dbparts['path'],'/'),
+            'username' => $dbparts['user'],
+            'password' => $dbparts['pass'],
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
