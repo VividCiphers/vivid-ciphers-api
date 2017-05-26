@@ -15,11 +15,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $response = [
-            'msg' => 'All users',
-            'user' => User::all()];
+        // $response = [
+        //     'msg' => 'All users',
+        //     'user' => User::all()];
         
-        return response()->json($response, 200);
+        // return response()->json($response, 200);
+        return response()->json("Hi", 200);
     }
 
     /**
