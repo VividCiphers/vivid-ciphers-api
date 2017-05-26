@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Role;
+use App\Skill;
 
 class SkillController extends Controller
 {
@@ -15,8 +15,8 @@ class SkillController extends Controller
     public function index()
     {
            $response = [
-            'msg' => 'All roles',
-            'roles' => Role::all()];
+            'msg' => 'All skills',
+            'roles' => Skill::all()];
         
         return response()->json($response, 200);
 
