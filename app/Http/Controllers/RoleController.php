@@ -9,7 +9,7 @@ use App\User;
 class RoleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. 
      *
      * @return \Illuminate\Http\Response
      */
@@ -64,7 +64,13 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        return "Hi!";
+
+        $response = [
+            'msg' => "Found 1 role with id $id",
+            'role' => Role::find($id)
+        ];
+        
+        return response()->json($response, 200);
     }
 
     public function assignUser(Request $request, $id){
@@ -90,7 +96,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::find($id);
     }
 
     /**
@@ -102,7 +108,21 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $this->validate($request,[
+            'role_name'=>'required'
+        ]);
+
+        $role = Role::find($id);
+        $role->role_name = $request->role_name;
+        $role->save();
+
+        $response = [
+            'msg' => "Role $role->role_name created.",
+            'role' => $role
+        ];
+
+        return response()->json($response, 201);
+
     }
 
     /**
@@ -113,6 +133,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::find($id);
+        $role->delete();
     }
 }
