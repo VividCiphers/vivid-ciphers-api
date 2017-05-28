@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
+if (Request::is("api/*")) {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, If-Modified-Since, Cache-Control, Pragma");
+}
+
 Route::resource('/users', 'UserController');
 Route::resource('/roles', 'RoleController');
 Route::resource('/skills', 'SkillController');
