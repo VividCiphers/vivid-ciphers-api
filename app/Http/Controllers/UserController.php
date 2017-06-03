@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $response = [
             'msg' => 'All users',
-            'users' => User::with('profile')->get()];
+            'users' => User::with('profile', 'roles')->get()];
         
         return response()->json($response, 200);
     }
